@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Blog Layout</title>
+    <style type="text/css">
+        *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: Cambria, Georgia, serif;
+    background-color: #f3f6fb;
+    line-height: 1.6;
+}
+
+/* Header */
+header{
+    background-color: #1e3a8a;
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+header h1{
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+/* Blog Container */
+.blog-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    padding: 40px 5%;
+}
+
+/* Blog Card */
+.blog-card{
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    flex: 1 1 280px;   /* Responsive width */
+    max-width: 320px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect */
+.blog-card:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+}
+
+.blog-card h2{
+    color: #1e293b;
+    margin-bottom: 12px;
+    font-size: 20px;
+}
+
+.blog-card p{
+    margin-bottom: 20px;
+    color: #475569;
+    font-size: 15px;
+}
+
+/* Button */
+.btn{
+    align-self: flex-start;
+    padding: 8px 16px;
+    background-color: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover{
+    background-color: #1e40af;
+}
+
+/* Tablet */
+@media (max-width: 900px){
+    .blog-card{
+        flex: 1 1 45%;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px){
+    .blog-container{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .blog-card{
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+    </style>
+</head>
+<body>
+   <header>
+    <h1>My Tech Blog</h1>
+   </header>
+   <div class="blog-container">
+    <div class="blog-card">
+        <h2>Understanding HTML Basics</h2>
+        <p>Learn the foundation of web development by mastering HTML elements and structures.</p>
+        <a href="#" class="btn">Read More</a>
+    </div>
+    <div class="blog-card">
+        <h2>Getting Started with CSS</h2>
+        <p>Explore styling techniques,and layout systems to design modern websites.</p>
+        <a href="#" class="btn">Read More</a>
+    </div>
+    <div class= "blog-card">
+        <h2>Responsive Web Design</h2>
+        <p>Understand media queries and flexible units to create mobile-friendly website.</p>
+        <a href="#" class="btn">Read More</a>
+    </div>
+    <div class="blog-card">
+        <h2>Modern UI Best Practices</h2>
+        <p>Improve your websote's visual hierarchy and usability with clean design principles.</p>
+        <a href="#" class="btn">Read More</a>
+    </div>
+
+   </div>
+</body>
+</html>
