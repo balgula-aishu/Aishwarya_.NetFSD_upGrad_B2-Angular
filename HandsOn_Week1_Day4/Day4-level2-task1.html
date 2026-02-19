@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Signal Simulator</title>
+</head>
+<body>
+    <h2>Traffic Signal Simulator</h2>
+    <p>Open the browser console to see the output.</p>
+    <script>
+        let signal="green";
+
+        switch(signal){
+            case "red" :
+                console.log("%cRED","color:white;background-color:red;font-size:18px;padding:5px;");
+                // console.log("Signal Color :"+signal);
+                console.log("Instruction: Stop");
+                break;
+
+                case "yellow" :
+                // console.log("Signal Color :"+signal);
+                console.log("%cYELLOW","color:black;background-color:yellow;font-size:18px;padding:5px;");
+                console.log("Instruction: Get Ready");
+                break;
+
+                case "green" :
+                // console.log("Signal Color :"+signal);
+                console.log("%cGREEN","color:white;background-color:green;font-size:18px;padding:5px;");
+                console.log("Instruction: Go!");
+                break;
+
+                default:
+                    // console.log("Signal Color:"+signal);
+                    console.log("%cInvalid signal color!","color:white;background-color:gray;font-size:16px;padding:5px;")
+                    console.log("Invalid signal color entered");
+
+        }
+    </script>
+</body>
+</html>
