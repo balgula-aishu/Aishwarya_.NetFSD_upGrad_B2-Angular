@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greeting Generator</title>
+</head>
+<body>
+    <style type="text/css">
+        h2{
+            color: brown;
+        }
+        #username{
+            height: 30px;
+            width: 200px;
+            border-radius: 5px;
+            border:1px solid gray;
+        }
+        #btn{
+            color: white;
+            height: 30px;
+            font-size: 14px;
+            border-radius: 8px;
+            border: none;
+            background-color: blue;
+        }
+        #greetingMessage{
+            color: brown;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 20px;
+        }
+    </style>
+    <h2>Greeting Generator</h2>
+
+    <input type="text" id="username" placeholder="Enter your name">
+    <br><br>
+  
+    <button onclick="generateGreeting()" id="btn">Generate Greeting</button>
+
+    <p id="greetingMessage"></p>
+    <script type="text/javascript">
+        function generateGreeting() {
+
+            // getting name from the input
+        const name=document.getElementById("username").value;
+
+        // local variable declared inside function
+        const greeting="Hello, "+name + " ! Welcome to our website🥳.";
+
+        // display greeting inside p tag
+        document.getElementById("greetingMessage").innerHTML=greeting;
+
+        }
+    </script>
+</body>
+</html>

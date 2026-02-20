@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter App</title>
+     <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            width: 300px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        #counterValue {
+            font-size: 30px;
+            font-weight: bold;
+            color: #ff4b2b;
+            margin-bottom: 25px;
+        }
+        .buttons{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            flex: 1;
+            margin: 5px;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            color: white;
+        }
+
+        #incrementBtn {
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+        }
+
+        #incrementBtn:hover {
+            transform: scale(1.1);
+        }
+
+        #resetBtn {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+        }
+
+        #resetBtn:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h2>Counter App</h2>
+    <br><br>
+    <p id="counterValue"> 0 </p>
+
+    <div class="buttons">
+    <button id="incrementBtn">Increment</button>
+    <button id="resetBtn">Reset</button>
+    </div>
+    </div>
+
+    <script>
+
+        var counter=0;
+
+        function updateDisplay(){
+            document.getElementById("counterValue").innerHTML=counter;
+        }
+        function incrementCounter(step){
+            counter=counter+step;
+            updateDisplay();
+        }
+        function resetCounter(){
+            counter=0;
+            updateDisplay();
+        }
+        document.getElementById("incrementBtn").onclick=function(){
+       incrementCounter(1);
+        };
+        document.getElementById("resetBtn").onclick=function(){
+            resetCounter();
+        };
+    </script>
+</body>
+</html>

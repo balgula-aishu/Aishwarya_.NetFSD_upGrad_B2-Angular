@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Info Display</title>
+    <style type="text/css">
+        h2{
+            color: blue;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: 25px;
+            font-weight: bold;
+        }
+       #btn{
+        color: white;
+        background-color: blue;
+        font-size: 15px;
+        /* width: 150px; */
+        height: 30px;
+        border: none;
+        border-radius: 8px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+       }
+       #name{
+        color:blue ;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 18px;
+       }
+       #age{
+        color:blue ;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 18px;
+       }
+       #city{
+        color:blue ;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 18px;
+       }
+    </style>
+</head>
+<body>
+    <h2>User Information</h2>
+    <button onclick="handleClick()" id="btn">Display User Info</button>
+
+    <p id="name"></p>
+    <p id="age"></p>
+    <p id="city"></p>
+     <script>
+        function handleClick(){
+            const user={
+                name:"Aishu",
+                age:23,
+                city:"Hyderabad"
+            };
+            displayUserInfo(user);
+        }
+        function displayUserInfo(userObj){
+
+            // accessing values
+            document.getElementById("name").innerHTML="Name : "+userObj.name;
+            document.getElementById("age").innerHTML="Age : "+userObj.age;
+            document.getElementById("city").innerHTML="City : "+userObj.city;
+        }
+     </script>
+</body>
+</html>

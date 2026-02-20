@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile Manager</title>
+    <style type="text/css"> 
+    body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 40px;
+            background-color: #f5e1ea;
+        }
+        h2{
+            color: blue;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        #profileCard {
+            width: 300px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #e9dada;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin-top: 10px;
+            font-size: 14px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 7px;
+        }
+
+        input {
+            padding: 5px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid gray;
+        }
+
+    </style>
+</head>
+<body>
+    <h2>Dynamic Student Profile Manager</h2>
+    <div id="profileCard"></div>
+    <input type="number" id="newMarksInput" placeholder="Enter new marks">
+    <br><br>
+    <button id="updateMarksBtn">Update Marks</button>
+    <script>
+        const student={
+            name:"Aishwarya Balgula",
+            rollNo:105,
+            marks:95
+        }
+        function updateStudentProfile(studentObj){
+            let profileDiv=document.getElementById("profileCard");
+
+            profileDiv.innerHTML=
+            "<h3>Student Profile</h3>" +
+                "<p><strong>Name:</strong> " + studentObj.name + "</p>" +
+                "<p><strong>Roll No:</strong> " + studentObj.rollNo + "</p>" +
+                "<p><strong>Marks:</strong> " + studentObj.marks + "</p>";
+        }
+        function updateMarks(newMarks){
+            student.marks=newMarks;
+            updateStudentProfile(student);
+        }
+        document.getElementById("updateMarksBtn").onclick=function(){
+            let newMarksValue=document.getElementById("newMarksInput").value;
+            if(newMarksValue !==""){
+                updateMarks(parseInt(newMarksValue));
+            }
+        }
+        updateStudentProfile(student);
+    </script>
+</body>
+</html>
