@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Based Weather Logger</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      text-align: center;
+      padding: 40px;
+      color: #333;
+    }
+
+    .container {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background: #4facfe;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #0077ff;
+    }
+
+    .location-box {
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+    .history {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .history-item {
+      background: #f1f1f1;
+      padding: 8px;
+      margin-bottom: 5px;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+    <div class="container">
+    <h2>Location Based Weather Logger</h2>
+
+    <button onclick="getLocation()">Get My Location</button>
+
+    <div class="location-box" id="currentLocation"></div>
+    <div class="error" id="errorMessage"></div>
+
+    <div class="history">
+      <h3>Last 5 Locations</h3>
+      <div id="locationHistory"></div>
+    </div>
+  </div>
+
+<script>
+
+  // Load history on page load
+  window.onload = () => {
+    displayHistory();
+  };
+
+  function getLocation() {
+    const errorDiv = document.getElementById("errorMessage");
+    errorDiv.textContent = "";
+
+    if (!navigator.geolocation) {
+      errorDiv.textContent = "Geolocation is not supported by your browser.";
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      successCallback,
+      errorCallback,
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+      }
+    );
+  }
+
+  // SUCCESS CALLBACK
+  function successCallback(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+
+    document.getElementById("currentLocation").innerHTML = `
+      <p><strong>Latitude:</strong> ${latitude}</p>
+      <p><strong>Longitude:</strong> ${longitude}</p>
+    `;
+
+    saveLocation(latitude, longitude);
+  }
+
+  // ERROR CALLBACK
+  function errorCallback(error) {
+    const errorDiv = document.getElementById("errorMessage");
+
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        errorDiv.textContent = "Permission denied. Please allow location access.";
+        break;
+      case error.POSITION_UNAVAILABLE:
+        errorDiv.textContent = "Location information is unavailable.";
+        break;
+      case error.TIMEOUT:
+        errorDiv.textContent = "The request to get location timed out.";
+        break;
+      default:
+        errorDiv.textContent = "An unknown error occurred.";
+        break;
+    }
+  }
+
+  function saveLocation(lat, lon) {
+    let history = JSON.parse(localStorage.getItem("locationHistory")) || [];
+
+    const newEntry = {
+      latitude: lat,
+      longitude: lon,
+      time: new Date().toLocaleString()
+    };
+
+    history.unshift(newEntry);
+
+    // Keep only last 5 entries
+    if (history.length > 5) {
+      history = history.slice(0, 5);
+    }
+
+    localStorage.setItem("locationHistory", JSON.stringify(history));
+
+    displayHistory();
+  }
+
+  function displayHistory() {
+    const historyDiv = document.getElementById("locationHistory");
+    let history = JSON.parse(localStorage.getItem("locationHistory")) || [];
+
+    historyDiv.innerHTML = "";
+
+    history.forEach(entry => {
+      historyDiv.innerHTML += `
+        <div class="history-item">
+           ${entry.latitude}, ${entry.longitude} <br>
+           ${entry.time}
+        </div>
+      `;
+    });
+  }
+
+</script>
+</body>
+</html>
