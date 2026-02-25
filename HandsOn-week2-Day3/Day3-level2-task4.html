@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini Product Search App</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            padding-top: 50px;
+        }
+
+        .container {
+            width: 400px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 8px;
+            background: #eee;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .no-results {
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Product Search</h2>
+    <input type="text" id="searchInput" placeholder="Search products...">
+    <ul id="productList"></ul>
+    <p id="noResults" class="no-results"></p>
+</div>
+
+<script>
+
+const products = [
+    "Laptop",
+    "Mobile Phone",
+    "Headphones",
+    "Keyboard",
+    "Mouse",
+    "Smart Watch",
+    "Camera",
+    "Tablet",
+    "Charger",
+    "Speaker"
+];
+
+const searchInput = document.getElementById("searchInput");
+const productList = document.getElementById("productList");
+const noResults = document.getElementById("noResults");
+
+function renderProducts(productArray) {
+
+    productList.innerHTML = "";
+
+    if (productArray.length === 0) {
+        noResults.textContent = "No Results Found";
+        return;
+    }
+
+    noResults.textContent = "";
+
+    productArray.forEach(product => {
+        const li = document.createElement("li");
+        li.textContent = product;
+        productList.appendChild(li);
+    });
+}
+
+
+function filterProducts() {
+
+    const searchValue = searchInput.value.toLowerCase();
+
+    const filtered = products.filter(product =>
+        product.toLowerCase().includes(searchValue)
+    );
+
+    renderProducts(filtered);
+}
+
+
+productList.addEventListener("click", function(event) {
+    if (event.target.tagName === "LI") {
+        alert("You selected: " + event.target.textContent);
+    }
+});
+
+
+
+searchInput.addEventListener("input", filterProducts);
+
+
+// Initial Load
+renderProducts(products);
+
+</script>
+
+</body>
+</html>
