@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery To-Do List</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .todo-container {
+            width: 400px;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        input {
+            flex: 1;
+            padding: 8px;
+        }
+
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            background: #f9f9f9;
+            padding: 8px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 5px;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        .delete-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+        }
+
+        .counts {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="todo-container">
+    <h2>To-Do List</h2>
+
+    <div class="input-section">
+        <input type="text" id="taskInput" placeholder="Enter new task">
+        <button id="addBtn">Add</button>
+    </div>
+
+    <ul id="taskList"></ul>
+
+    <div class="counts">
+        Total Tasks: <span id="totalCount">0</span> <br>
+        Completed Tasks: <span id="completedCount">0</span>
+    </div>
+</div>
+
+<script>
+$(document).ready(function(){
+
+    var totalTasks = 0;
+    var completedTasks = 0;
+
+    // Add Task
+    $("#addBtn").click(function(){
+
+        var taskText = $("#taskInput").val().trim();
+
+        if(taskText !== ""){
+
+            var newTask = `
+                <li>
+                    <span class="task-text">${taskText}</span>
+                    <button class="delete-btn">Delete</button>
+                </li>
+            `;
+
+            $("#taskList").append(newTask);   // append()
+
+            totalTasks++;
+            $("#totalCount").text(totalTasks);
+
+            $("#taskInput").val("");
+        }
+    });
+
+    // Mark as Completed (Event Delegation)
+    $("#taskList").on("click", ".task-text", function(){
+
+        $(this).toggleClass("completed");   // toggleClass()
+
+        if($(this).hasClass("completed")){
+            completedTasks++;
+        } else {
+            completedTasks--;
+        }
+
+        $("#completedCount").text(completedTasks);
+    });
+
+    // Delete Task (Event Delegation)
+    $("#taskList").on("click", ".delete-btn", function(){
+
+        var isCompleted = $(this).siblings(".task-text").hasClass("completed");
+
+        if(isCompleted){
+            completedTasks--;
+            $("#completedCount").text(completedTasks);
+        }
+
+        totalTasks--;
+        $("#totalCount").text(totalTasks);
+
+        $(this).parent().remove();   // remove()
+    });
+
+});
+</script>
+
+</body>
+</html>

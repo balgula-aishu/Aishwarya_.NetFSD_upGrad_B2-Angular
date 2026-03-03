@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Togle Section</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style type="text/css">
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #be24e5, #c81c64 ,#e15923 );
+        }
+
+        .faq-container {
+            width: 500px;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: rgb(10, 10, 10);
+        }
+
+        .faq-item {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .question {
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .question:hover {
+            background: #f0f0f052;
+        }
+
+        .answer {
+            display: none;
+            padding: 10px;
+            color: #1e28ea;
+        }
+
+        .active {
+            color: #d41a1a;
+        }
+    </style>
+</head>
+<body>
+    <div class="faq-container">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+           <div class="question">1.What courses do you offer</div>
+           <div class="answer">Ans: We offer Web Development, Java, Python, .NET,  and Data Science courses.</div>
+        </div>
+          <br>
+        <div class="faq-item">
+           <div class="question">2.How can I enroll?</div>
+           <div class="answer">Ans: You can enroll by filling out the registration form on our website.</div>
+        </div>
+      <br>
+        <div class="faq-item">
+           <div class="question">3.Do you provide certificates?</div>
+           <div class="answer">Ans: Yes, we provide certificates after successful course completion. </div>
+        </div>
+       <br>
+        <div class="faq-item">
+           <div class="question">4.Are the classes online or offline?</div>
+           <div class="answer">Ans: We provide both online and offline classroom traning.</div>
+        </div>
+          <br>
+        <div class="faq-item">
+           <div class="question">5.What is the course duration?</div>
+           <div class="answer">Ans: Course duration depends on the program and usually ranges from 2 to 6 months.</div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $(".question").click(function(){
+                $(this).next(".answer").slideToggle();
+                $(this).toggleClass("active");
+            })
+        }
+
+        );
+    </script>
+</body>
+</html>
