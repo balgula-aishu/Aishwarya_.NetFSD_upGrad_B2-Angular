@@ -1,0 +1,93 @@
+﻿@model IEnumerable<UVEMS.DAL.Models.SessionInfo>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Event Sessions";
+}
+
+<!-- HEADER -->
+<div class="text-center mb-4 fade-in">
+
+    <h2 class="text-gradient">
+        <i class="fa fa-clock me-2"></i> Event Sessions
+    </h2>
+
+    <p class="text-muted-custom">
+        Sessions scheduled for this event
+    </p>
+
+</div>
+
+<!-- SESSION CARDS -->
+<div class="row g-4">
+
+    @if (Model != null && Model.Any())
+    {
+        foreach (var s in Model)
+        {
+            <div class="col-md-6">
+
+                <!-- SAME AS HOME EVENT CARD -->
+                <div class="event-card h-100 d-flex flex-column justify-content-between">
+
+                    <!-- CONTENT -->
+                    <div>
+
+                        <h5 class="fw-bold text-white mb-2">
+                            @s.SessionTitle
+                        </h5>
+
+                        <p class="text-muted-custom mb-1">
+                            <i class="fa fa-clock text-warning me-1"></i>
+                            @s.SessionStart.ToString("hh:mm tt")
+                            -
+                            @s.SessionEnd.ToString("hh:mm tt")
+                        </p>
+
+                        <p class="text-muted-custom mb-1">
+                            <i class="fa fa-user-tie text-info me-1"></i>
+
+                            Speaker:
+                            <span class="text-white">
+                                @(s.Speaker != null ? s.Speaker.SpeakerName : "Not Assigned")
+                            </span>
+                        </p>
+
+                        <!-- SESSION URL -->
+                        @if (!string.IsNullOrEmpty(s.SessionUrl))
+                        {
+                            <p class="text-muted-custom mb-0">
+                                <i class="fa fa-link text-info me-1"></i>
+
+                                <a href="@s.SessionUrl"
+                                   target="_blank"
+                                   style="
+                                                    color:#00eaff;
+                                                    font-weight:500;
+                                                    text-decoration:none;
+                                               ">
+                                    Join Session
+                                </a>
+                            </p>
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+    }
+    else
+    {
+        <div class="text-center mt-5 fade-in">
+            <h5>No Sessions Found</h5>
+            <p class="text-muted-custom">
+                No sessions available for this event.
+            </p>
+        </div>
+    }
+
+</div>

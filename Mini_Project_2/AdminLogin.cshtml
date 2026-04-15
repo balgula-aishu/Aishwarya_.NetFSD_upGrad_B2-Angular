@@ -1,0 +1,92 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewData["Title"] = "Admin Login";
+}
+
+<div class="d-flex justify-content-center align-items-center min-vh-100 fade-in">
+
+    <div class="card center-card">
+
+        <div class="text-center mb-4">
+
+            <div class="icon-box bg-info mb-3">
+                <i class="fa fa-user-shield"></i>
+            </div>
+
+            <h3 class="text-white">Admin Login</h3>
+        </div>
+
+        <div class="alert alert-info text-dark small">
+            <b>Demo Credentials</b><br />
+            admin@gmail.com <br />
+            admin123
+        </div>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger">
+                <i class="fa fa-exclamation-circle me-1"></i> @ViewBag.Error
+            </div>
+        }
+
+        <form asp-action="AdminLogin" method="post">
+
+            <div class="mb-3">
+                <label class="text-white">Email</label>
+
+                <input type="email"
+                       name="email"
+                       class="form-control custom-input text-white"
+                       style="color:black !important;"
+                       placeholder="Enter admin email"
+                       required />
+            </div>
+
+            <div class="mb-3">
+                <label class="text-white">Password</label>
+
+                <div class="input-group">
+
+                    <input type="password"
+                           name="password"
+                           id="password"
+                           class="form-control custom-input text-white"
+                           style="color:black !important;"
+                           placeholder="Enter password"
+                           required />
+
+                    <span class="input-group-text bg-transparent text-white border-0"
+                          onclick="togglePassword()"
+                          style="cursor:pointer;">
+                        <i class="fa fa-eye" id="eyeIcon"></i>
+                    </span>
+
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-custom w-100 mt-3">
+                <i class="fa fa-sign-in-alt me-1"></i> Login
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+    function togglePassword() {
+        var input = document.getElementById("password");
+        var icon = document.getElementById("eyeIcon");
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.replace("fa-eye", "fa-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.replace("fa-eye-slash", "fa-eye");
+        }
+    }
+</script>

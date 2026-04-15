@@ -1,0 +1,75 @@
+﻿@model UVEMS.DAL.Models.SessionInfo
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Assign Speaker";
+}
+
+<div class="mb-5 fade-in text-center">
+
+    <h2 class="text-gradient mb-2">
+        <i class="fa fa-user-tie me-2"></i> Assign Speaker
+    </h2>
+
+    <p class="text-muted-custom">
+        Select a speaker to assign to this session
+    </p>
+
+</div>
+
+<div class="center-card mx-auto fade-in" style="max-width:650px;">
+
+    <form asp-action="AssignSpeaker" method="post">
+
+        <input type="hidden" asp-for="SessionId" />
+
+        <div class="mb-4">
+
+            <label class="form-label text-white mb-2 d-block">
+                Choose Speaker
+            </label>
+
+            <!-- ✅ FIXED DROPDOWN -->
+            <select asp-for="SpeakerId"
+                    class="form-control custom-input fixed-input"
+                    style="color:black !important; background:white !important;">
+
+                <option value="">-- Select Speaker --</option>
+
+                @foreach (var s in ViewBag.Speakers)
+                {
+                    <option value="@s.SpeakerId">
+                        @s.SpeakerName
+                    </option>
+                }
+
+            </select>
+
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-4">
+
+            <a href="/Admin/SessionList?eventId=@ViewBag.EventId"
+               class="btn btn-outline-light px-4"
+               style="border:1px solid rgba(255,255,255,0.3); border-radius:10px;">
+                <i class="fa fa-arrow-left me-1"></i> Back
+            </a>
+
+            <button type="submit"
+                    class="btn px-5"
+                    style="
+                        background: linear-gradient(45deg, #00eaff, #0072ff);
+                        color: white;
+                        font-weight: 500;
+                        border-radius: 10px;
+                    ">
+                <i class="fa fa-check me-1"></i> Assign Speaker
+            </button>
+
+        </div>
+
+    </form>
+
+</div>

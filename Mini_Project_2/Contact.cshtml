@@ -1,0 +1,140 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<!-- PAGE TITLE -->
+<div class="text-center mb-5 fade-in">
+    <h2 class="text-gradient">
+        <i class="fa-solid fa-envelope-open-text me-2" style="color:white;"></i> Contact Us
+    </h2>
+
+    <p class="text-muted-custom" style="max-width:600px; margin:auto;">
+        Need help with events, sessions, or registrations? Reach out to us and we’ll assist you quickly.
+    </p>
+</div>
+
+<div class="row g-4">
+
+    <!-- LEFT SIDE - FORM -->
+    <div class="col-md-6 fade-in">
+
+        <div class="card">
+
+            <h4 class="mb-3">
+                <i class="fa-solid fa-paper-plane text-info me-2 text-white"></i> Send Message
+            </h4>
+
+            <form method="post" asp-action="Contact">
+
+                <div class="mb-3">
+                    <label class="text-white">
+                        <i class="fa fa-user me-1"></i> Name
+                    </label>
+                    <input name="Name"
+                           class="form-control custom-input fixed-input"
+                           placeholder="Enter your name"
+                           required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="text-white">
+                        <i class="fa fa-envelope me-1"></i> Email
+                    </label>
+                    <input name="Email"
+                           type="email"
+                           class="form-control custom-input fixed-input"
+                           placeholder="Enter your email"
+                           required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="text-white">
+                        <i class="fa fa-comment me-1"></i> Message
+                    </label>
+                    <textarea name="Message"
+                              class="form-control custom-input fixed-input"
+                              rows="5"
+                              placeholder="Write your message..."
+                              required></textarea>
+                </div>
+
+                <button class="btn btn-custom w-100 mt-2" style="color:white">
+                  Send Message
+                </button>
+
+            </form>
+
+            @if (ViewBag.Success != null)
+            {
+                <div class="alert alert-success mt-3">
+                     @ViewBag.Success
+                </div>
+            }
+
+        </div>
+    </div>
+
+
+    <!-- RIGHT SIDE - CONTACT INFO -->
+    <div class="col-md-6 fade-in">
+
+        <div class="card h-100 d-flex flex-column justify-content-between">
+
+            <div>
+                <h4 class="mb-3">
+                    <i class="fa-solid fa-address-book text-warning me-2"></i> Contact Details
+                </h4>
+
+                <div class="mb-3">
+                    <p class="mb-1 text-muted-custom">Email</p>
+                    <p>
+                        <i class="fa fa-envelope text-info me-2"></i>
+                        support@uvems.com
+                    </p>
+                </div>
+
+                <div class="mb-3">
+                    <p class="mb-1 text-muted-custom">Phone</p>
+                    <p>
+                        <i class="fa fa-phone text-success me-2"></i>
+                        +91 9876543210
+                    </p>
+                </div>
+
+                <div class="mb-3">
+                    <p class="mb-1 text-muted-custom">Location</p>
+                    <p>
+                        <i class="fa fa-location-dot text-danger me-2"></i>
+                        Telangana, India
+                    </p>
+                </div>
+
+                <hr style="border-color: rgba(255,255,255,0.1);" />
+
+                <p class="text-muted-custom">
+                    We assist with event participation, session access, and platform-related issues.
+                </p>
+            </div>
+
+            <!-- SOCIAL ICONS -->
+            <div class="mt-3">
+                <a href="#" class="me-3 text-info">
+                    <i class="fa-brands fa-linkedin fa-lg"></i>
+                </a>
+
+                <a href="#" class="me-3 text-light">
+                    <i class="fa-brands fa-github fa-lg"></i>
+                </a>
+
+                <a href="#" class="text-info">
+                    <i class="fa-brands fa-x-twitter fa-lg"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</div>

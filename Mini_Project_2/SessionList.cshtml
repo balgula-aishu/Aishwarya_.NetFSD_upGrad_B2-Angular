@@ -1,0 +1,124 @@
+﻿@model IEnumerable<UVEMS.DAL.Models.SessionInfo>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Sessions";
+}
+
+<!-- HEADER -->
+<div class="d-flex justify-content-between align-items-center mb-4 fade-in">
+
+    <div>
+        <h2 class="text-gradient mb-1">
+            <i class="fa fa-clock me-2"></i> Sessions
+        </h2>
+        <p class="text-muted-custom">
+            Manage event sessions and assign speakers easily
+        </p>
+    </div>
+
+    <!-- ADD SESSION (ORANGE/YELLOW STYLE) -->
+    <a href="/Admin/AddSession?eventId=@ViewBag.EventId"
+       class="btn"
+       style="
+            background: linear-gradient(45deg, #ffc107, #ff9800);
+            color: black;
+            font-weight: 500;
+            border-radius: 10px;
+            padding: 10px 16px;
+       ">
+        <i class="fa fa-plus"></i> Add Session
+    </a>
+
+</div>
+
+<!-- SESSION CARDS (SAME AS EVENT CARDS STYLE) -->
+<div class="row g-4">
+
+    @foreach (var s in Model)
+    {
+        <div class="col-md-6 fade-in">
+
+            <div class="event-card h-100 d-flex flex-column justify-content-between">
+
+                <!-- TOP CONTENT -->
+                <div>
+
+                    <h5 class="fw-bold mb-2 text-white">
+                        @s.SessionTitle
+                    </h5>
+
+                    <p class="text-muted-custom mb-2">
+                        <i class="fa fa-clock text-warning me-1"></i>
+                        @s.SessionStart.ToString("hh:mm tt")
+                        -
+                        @s.SessionEnd.ToString("hh:mm tt")
+                    </p>
+
+                    <p class="mb-3" style="color:#cbd5e1;">
+                        <i class="fa fa-user-tie text-info me-1"></i>
+
+                        @if (s.Speaker != null)
+                        {
+                            <span class="text-white">@s.Speaker.SpeakerName</span>
+                        }
+                        else
+                        {
+                            <span class="text-muted-custom">No speaker assigned</span>
+                        }
+                    </p>
+
+                </div>
+
+                <!-- ACTION -->
+                <div>
+
+                    <!-- SKY BLUE BUTTON -->
+                    <a href="/Admin/AssignSpeaker?sessionId=@s.SessionId"
+                       class="btn w-100"
+                       style="
+                                background: linear-gradient(45deg, #00eaff, #0072ff);
+                                color: white;
+                                border-radius: 10px;
+                                font-weight: 500;
+                           ">
+                        <i class="fa fa-user-plus me-1"></i> Assign Speaker
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+</div>
+
+<!-- EMPTY STATE -->
+@if (!Model.Any())
+{
+    <div class="text-center mt-5 fade-in">
+
+        <i class="fa fa-clock fa-2x mb-3 text-muted-custom"></i>
+
+        <h5>No Sessions Available</h5>
+        <p class="text-muted-custom">
+            Start by adding a session to this event
+        </p>
+
+        <a href="/Admin/AddSession?eventId=@ViewBag.EventId"
+           class="btn"
+           style="
+                    background: linear-gradient(45deg, #ffc107, #ff9800);
+                    color: black;
+                    font-weight: 500;
+                    border-radius: 10px;
+                    padding: 10px 16px;
+               ">
+            <i class="fa fa-plus"></i> Add Session
+        </a>
+
+    </div>
+}

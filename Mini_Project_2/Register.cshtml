@@ -1,0 +1,101 @@
+﻿@model UVEMS.DAL.Models.UserInfo
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Register";
+}
+
+<div class="d-flex justify-content-center align-items-center min-vh-100 fade-in">
+
+    <div class="card center-card">
+
+        <!-- HEADER -->
+        <div class="text-center mb-4">
+
+            <div class="icon-box bg-info mb-3">
+                <i class="fa fa-user-plus"></i>
+            </div>
+
+            <h3 class="text-white">Create Account</h3>
+
+        </div>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger">
+                @ViewBag.Error
+            </div>
+        }
+
+        <form asp-action="Register" method="post">
+
+            <!-- EMAIL -->
+            <div class="mb-3">
+                <input asp-for="EmailId"
+                       class="form-control custom-input fixed-input"
+                       style="color:black !important; background:white !important;"
+                       placeholder="Enter email" />
+            </div>
+
+            <!-- USERNAME -->
+            <div class="mb-3">
+                <label class="text-white">Username</label>
+                <input asp-for="UserName"
+                       class="form-control custom-input fixed-input"
+                       style="color:black !important; background:white !important;"
+                       placeholder="Enter username" />
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="mb-3">
+                <label class="text-white">Password</label>
+
+                <div class="input-group">
+                    <input asp-for="Password"
+                           type="password"
+                           id="password"
+                           class="form-control custom-input fixed-input"
+                           style="color:black !important; background:white !important;"
+                           placeholder="Create password" />
+
+                    <span class="input-group-text bg-transparent text-white border-0"
+                          onclick="togglePassword()">
+                        <i class="fa fa-eye" id="eyeIcon"></i>
+                    </span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-custom w-100 mt-2">
+                <i class="fa fa-user-plus"></i> Create Account
+            </button>
+
+        </form>
+
+        <!-- LOGIN LINK -->
+        <div class="text-center mt-3">
+
+            <p class="text-white mb-1">Already registered?</p>
+
+            <a href="/Common/ParticipantLogin" class="text-info fw-bold">
+                Login here
+            </a>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function togglePassword() {
+        var input = document.getElementById("password");
+        var icon = document.getElementById("eyeIcon");
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.replace("fa-eye", "fa-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.replace("fa-eye-slash", "fa-eye");
+        }
+    }
+</script>

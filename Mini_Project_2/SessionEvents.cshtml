@@ -1,0 +1,94 @@
+﻿@model IEnumerable<UVEMS.DAL.Models.EventDetails>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="text-center mb-5 fade-in">
+
+        <h2 class="text-gradient mb-2">
+            <i class="fa fa-layer-group me-2"></i> Manage Sessions
+        </h2>
+
+        <p class="text-muted-custom" style="max-width:600px; margin:auto;">
+            Select an event to view, organize, and manage its sessions efficiently
+        </p>
+
+    </div>
+
+    <!-- EVENT CARDS (HOME PAGE STYLE) -->
+    <div class="row g-4">
+
+        @foreach (var e in Model)
+        {
+            <div class="col-md-4 fade-in">
+
+                <div class="event-card h-100 d-flex flex-column justify-content-between text-center"
+                     style="
+                            transition: all 0.3s ease;
+                            cursor: pointer;
+                         "
+                     onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.5)'"
+                     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+
+                    <!-- TOP CONTENT -->
+                    <div>
+
+                        <h4 class="fw-bold mb-2 text-white">
+                            @e.EventName
+                        </h4>
+
+                        <p class="text-muted-custom mb-3">
+                            <i class="fa fa-tag text-info me-1"></i>
+                            @e.EventCategory
+                        </p>
+
+                    </div>
+
+                    <!-- BUTTON -->
+                    <div>
+
+                        <!-- SKY BLUE VIEW BUTTON -->
+                        <a href="/Admin/SessionList?eventId=@e.EventId"
+                           class="btn w-100"
+                           style="
+                                    background: linear-gradient(45deg, #00eaff, #0072ff);
+                                    color: white;
+                                    font-weight: 500;
+                                    border-radius: 10px;
+                               ">
+                            <i class="fa fa-eye me-1"></i> View Sessions
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+    <!-- EMPTY STATE -->
+    @if (!Model.Any())
+    {
+        <div class="text-center mt-5 fade-in">
+
+            <i class="fa fa-calendar-xmark fa-2x mb-3 text-muted-custom"></i>
+
+            <h5>No Events Available</h5>
+
+            <p class="text-muted-custom">
+                Create an event first to manage sessions
+            </p>
+
+            <a href="/Admin/AddEvent" class="btn btn-custom mt-2">
+                <i class="fa fa-plus"></i> Create Event
+            </a>
+
+        </div>
+    }
+
+</div>

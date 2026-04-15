@@ -1,0 +1,89 @@
+﻿@model IEnumerable<UVEMS.DAL.Models.ParticipantEventDetails>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "My Registered Events";
+}
+
+<!-- HEADER -->
+<h2 class="text-center mb-5 text-gradient fade-in">
+    <i class="fa-solid fa-calendar-check me-2"></i> My Registered Events
+</h2>
+
+<!-- EVENTS -->
+<div class="row g-4 fade-in">
+
+    @if (Model != null && Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            <div class="col-md-4">
+
+                <!-- HOME STYLE EVENT CARD -->
+                <div class="event-card h-100 d-flex flex-column justify-content-between">
+
+                    <!-- EVENT INFO -->
+                    <div>
+
+                        <h4 class="fw-bold text-white mb-2">
+                            @item.Event.EventName
+                        </h4>
+
+                        <p class="text-muted-custom mb-2">
+                            <i class="fa fa-calendar-days text-warning me-1"></i>
+                            @item.Event.EventDate.ToShortDateString()
+                        </p>
+
+                        <!-- STATUS BADGE (UNCHANGED COLORS) -->
+                        @if (item.IsAttended)
+                        {
+                            <span class="badge rounded-pill px-3 py-2"
+                                  style="background: linear-gradient(135deg,#43e97b,#38f9d7);">
+                                <i class="fa fa-check me-1"></i> Attended
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge rounded-pill px-3 py-2"
+                                  style="background: linear-gradient(135deg,#f7971e,#ffd200); color:black;">
+                                <i class="fa fa-clock me-1"></i> Not Attended
+                            </span>
+                        }
+
+                    </div>
+
+                    <!-- ACTION -->
+                    <div class="mt-3">
+
+                        <a href="/Participant/Sessions?eventId=@item.EventId"
+                           class="btn w-100"
+                           style="
+                                        background: linear-gradient(45deg, #00eaff, #0072ff);
+                                        color: white;
+                                        border-radius: 10px;
+                                        font-weight: 500;
+                                        font-size: 14px;
+                                   ">
+                            <i class="fa fa-eye me-1"></i> View Sessions
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+    }
+    else
+    {
+        <div class="text-center mt-5 fade-in">
+            <h5>No registered events yet</h5>
+            <p class="text-muted-custom">
+                Start exploring and register for events.
+            </p>
+        </div>
+    }
+
+</div>

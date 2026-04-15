@@ -1,0 +1,108 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewData["Title"] = "Participant Login";
+}
+
+<!-- CENTER WRAPPER -->
+<div class="d-flex justify-content-center align-items-center min-vh-100 fade-in">
+
+    <div class="card center-card">
+
+        <!-- HEADER -->
+        <div class="text-center mb-4">
+
+            <div class="icon-box bg-info mb-3">
+                <i class="fa fa-user"></i>
+            </div>
+
+            <h3 class="text-white">Participant Login</h3>
+
+        </div>
+
+        <!-- ERROR -->
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger">
+                <i class="fa fa-exclamation-circle me-1"></i> @ViewBag.Error
+            </div>
+        }
+
+        <!-- FORM -->
+        <form asp-action="ParticipantLogin" method="post">
+
+            <!-- EMAIL -->
+            <div class="mb-3">
+                <label class="text-white">Email</label>
+
+                <input type="email"
+                       name="email"
+                       class="form-control custom-input text-white"
+                       style="color:black !important;"
+                       placeholder="Enter your email"
+                       required />
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="mb-3">
+                <label class="text-white">Password</label>
+
+                <div class="input-group">
+
+                    <input type="password"
+                           name="password"
+                           id="password"
+                           class="form-control custom-input text-white"
+                           style="color:black !important;"
+                           placeholder="Enter password"
+                           required />
+
+                    <span class="input-group-text bg-transparent text-white border-0"
+                          onclick="togglePassword()"
+                          style="cursor:pointer;">
+                        <i class="fa fa-eye" id="eyeIcon"></i>
+                    </span>
+
+                </div>
+            </div>
+
+            <!-- LOGIN BUTTON -->
+            <button type="submit" class="btn btn-custom w-100 mt-3">
+                <i class="fa fa-sign-in-alt me-1"></i> Login
+            </button>
+
+        </form>
+
+        <!-- REGISTER LINK -->
+        <div class="text-center mt-4">
+
+            <p class="text-white mb-1">
+                New to UVEMS?
+            </p>
+
+            <a href="/Common/Register" class="text-info fw-bold">
+                Create Account
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- PASSWORD TOGGLE -->
+<script>
+    function togglePassword() {
+        var input = document.getElementById("password");
+        var icon = document.getElementById("eyeIcon");
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.replace("fa-eye", "fa-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.replace("fa-eye-slash", "fa-eye");
+        }
+    }
+</script>

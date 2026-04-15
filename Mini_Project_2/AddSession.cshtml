@@ -1,0 +1,102 @@
+﻿@model UVEMS.DAL.Models.SessionInfo
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Add Session";
+}
+
+<div class="mb-5 fade-in text-center">
+
+    <h2 class="text-gradient mb-2">
+        <i class="fa fa-clock me-2"></i> Add Session
+    </h2>
+
+    <p class="text-muted-custom">
+        Schedule sessions and manage event timing
+    </p>
+
+</div>
+
+<div class="center-card mx-auto fade-in" style="max-width:750px;">
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            <i class="fa fa-exclamation-circle"></i> @ViewBag.Error
+        </div>
+    }
+
+    <form asp-action="AddSession" method="post">
+
+        <input type="hidden" asp-for="EventId" />
+
+        <div class="row g-3">
+
+            <!-- SESSION TITLE -->
+            <div class="col-12">
+                <label class="form-label text-white">Session Title</label>
+
+                <input asp-for="SessionTitle"
+                       class="form-control custom-input fixed-input form-control-sm"
+                      style=" color:black !important; background:white !important;"
+                       placeholder="Enter session title" />
+            </div>
+
+            <!-- START TIME -->
+            <div class="col-md-6">
+                <label class="form-label text-white">Start Time</label>
+
+                <input asp-for="SessionStart"
+                       type="datetime-local"
+                       class="form-control custom-input fixed-input form-control-sm"
+                       value="@(Model.SessionStart != DateTime.MinValue ? Model.SessionStart.ToString("yyyy-MM-ddTHH:mm") : "")" />
+            </div>
+
+            <!-- END TIME -->
+            <div class="col-md-6">
+                <label class="form-label text-white">End Time</label>
+
+                <input asp-for="SessionEnd"
+                       type="datetime-local"
+                       class="form-control custom-input fixed-input form-control-sm"
+                       value="@(Model.SessionEnd != DateTime.MinValue ? Model.SessionEnd.ToString("yyyy-MM-ddTHH:mm") : "")" />
+            </div>
+
+            <!-- SESSION URL -->
+            <div class="col-12">
+                <label class="form-label text-white">Session URL</label>
+
+                <input asp-for="SessionUrl"
+                       class="form-control custom-input fixed-input form-control-sm"
+                       style="color:black !important; background:white !important;"
+                       placeholder="Paste meeting link (optional)" />
+            </div>
+
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-4">
+
+            <a href="/Admin/SessionList?eventId=@Model.EventId"
+               class="btn btn-outline-light px-4"
+               style="border:1px solid rgba(255,255,255,0.3); border-radius:10px;">
+                <i class="fa fa-arrow-left me-1"></i> Back
+            </a>
+
+            <button type="submit"
+                    class="btn px-5"
+                    style="
+                        background: linear-gradient(45deg, #00eaff, #0072ff);
+                        color: white;
+                        font-weight: 500;
+                        border-radius: 10px;
+                    ">
+                <i class="fa fa-plus me-1"></i> Add Session
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
