@@ -1,0 +1,15 @@
+root = true
+
+[*.cs]
+
+# Naming rules
+dotnet_naming_rule.private_fields_should_be_camel_case.severity = warning
+
+# Null checks
+dotnet_diagnostic.CS8602.severity = warning
+
+# Unused variables
+dotnet_diagnostic.CS0168.severity = warning
+
+# Simplify code
+dotnet_diagnostic.IDE0051.severity = warning
