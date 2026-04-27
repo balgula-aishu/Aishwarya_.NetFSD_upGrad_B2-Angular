@@ -1,0 +1,91 @@
+<h2>Contact List</h2>
+
+<p *ngIf="contacts.length === 0">No Contacts Available</p>
+
+<table *ngIf="contacts.length > 0" border="1">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Status</th>
+  </tr>
+
+  <tr *ngFor="let c of contacts"
+      [ngClass]="c.isActive ? 'active-contact' : 'inactive-contact'"
+      [ngStyle]="{'color': c.isActive ? 'green' : 'red'}">
+
+    <td>{{c.name}}</td>
+    <td>{{c.email}}</td>
+    <td>{{c.phone}}</td>
+
+    <td>
+      <span *ngIf="c.isActive; else inactive">Active Contact</span>
+      <ng-template #inactive>Inactive Contact</ng-template>
+    </td>
+
+  </tr>
+</table>
+<h2>Add Contact</h2>
+
+<form #contactForm="ngForm" (ngSubmit)="addContact(contactForm)">
+
+  <input type="text" name="name" [(ngModel)]="newContact.name" required #name="ngModel" placeholder="Name">
+  <div *ngIf="name.invalid && name.touched">Name is required</div>
+
+  <br><br>
+
+  <input type="email" name="email" [(ngModel)]="newContact.email" required email #email="ngModel" placeholder="Email">
+  <div *ngIf="email.invalid && email.touched">Valid email required</div>
+
+  <br><br>
+
+  <input type="text" name="phone" [(ngModel)]="newContact.phone" required minlength="10" #phone="ngModel" placeholder="Phone">
+  <div *ngIf="phone.invalid && phone.touched">Minimum 10 digits required</div>
+
+  <br><br>
+
+  <label>
+    <input type="checkbox" name="isActive" [(ngModel)]="newContact.isActive">
+    Active
+  </label>
+
+  <br><br>
+
+  <button type="submit">Add Contact</button>
+
+</form>
+<h2>Reactive Form</h2>
+
+<form [formGroup]="reactiveForm" (ngSubmit)="submitReactiveForm()">
+
+  <input formControlName="name" placeholder="Name">
+  <div *ngIf="reactiveForm.get('name')?.touched && reactiveForm.get('name')?.invalid">
+    Name is required
+  </div>
+
+  <br><br>
+
+  <input formControlName="email" placeholder="Email">
+  <div *ngIf="reactiveForm.get('email')?.touched && reactiveForm.get('email')?.invalid">
+    Enter valid email
+  </div>
+
+  <br><br>
+
+  <input formControlName="phone" placeholder="Phone">
+  <div *ngIf="reactiveForm.get('phone')?.touched && reactiveForm.get('phone')?.invalid">
+    Minimum 10 digits required
+  </div>
+
+  <br><br>
+
+  <label>
+    <input type="checkbox" formControlName="isActive">
+    Active
+  </label>
+
+  <br><br>
+
+  <button type="submit">Add (Reactive)</button>
+
+</form>
